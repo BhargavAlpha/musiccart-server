@@ -1,5 +1,8 @@
-const Products_schema = new Schema({
-    name:{
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema;
+
+const MusicProduct_schema  = new Schema({
+    name: {
         type: String,
         required: true,
       },
@@ -8,7 +11,7 @@ const Products_schema = new Schema({
         required: true,
       },
     rating:{
-        type: Number,
+        type: Object,
         required: true,
       },
     description:{
@@ -32,7 +35,7 @@ const Products_schema = new Schema({
         required: true,
       },
     featured:{
-        type: Boolean,
+        type: String,
         required: true,
       },
     available:{
@@ -55,11 +58,11 @@ const Products_schema = new Schema({
         type: String,
         required: true,
       }, 
-      cart :{
+      cart : {
         type : Array,
         required : true,
       }   
 })
 
-const Products = mongoose.model('products' , Products_schema)
-module.exports  = Products; 
+const MusicProducts = mongoose.model('music product' , MusicProduct_schema)
+module.exports  = MusicProducts;

@@ -1,28 +1,19 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-require('dotenv').config();
-const mongoURI = process.env.MONGODB_URI;
+const mongoose = require("mongoose");
+const app = require("./app");
 
-const app = express();
-const port = process.env.PORT || 4500;
+const port = 4500;
 
-// Middleware
-app.use(cors());
-app.use(bodyParser.json());
-
-// MongoDB Connection
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
-
-const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log('MongoDB connection established successfully');
-});
-
-// Routes (to be implemented)
-
-// Start the server
 app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
+  mongoose
+    .connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => {
+      console.log("Connected to database!");
+      console.log(`Server running on port ${port}`);
+    })
+    .catch((err) => {
+      console.log("Connection failed!",err);
+    });
 });
